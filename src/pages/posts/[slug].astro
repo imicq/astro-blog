@@ -1,0 +1,46 @@
+---
+import { getSortedPosts, slugOf, fmtDate } from '../../utils/posts';
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TOC from '../../components/TOC.astro';
+import TwikooComment from '../../components/TwikooComment.astro';
+import site from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  return posts.map((post) => ({ params: { slug: slugOf(post.id) }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<'posts'> };
+const { Content, headings } = await render(post);
+const url = `/posts/${slugOf(post.id)}/`;
+---
+
+<Base title={post.data.title} description={post.data.summary} withToc>
+  <div class="article-layout with-toc">
+    <div>
+      <div class="card">
+        <div class="post-header">
+          <h1>{post.data.title}</h1>
+          <div class="post-meta">
+            <span class="meta-author">
+              <img class="avatar" src={site.avatar} alt={site.author} />
+              {site.author}
+            </span>
+            <span>{fmtDate(post.data.date)}</span>
+            <a class="category-chip" href={`/categories/${post.data.category}/`}>{post.data.category}</a>
+            {post.data.tags.map((t) => <a class="tag" href={`/tags/${t}/`}>{t}</a>)}
+          </div>
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+      <div class="card">
+        <TwikooComment />
+      </div>
+    </div>
+    <TOC headings={headings} />
+  </div>
+</Base>

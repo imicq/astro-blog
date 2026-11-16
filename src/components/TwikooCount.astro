@@ -1,0 +1,41 @@
+---
+import site from '../config/site';
+interface Props {
+  /** 文章路径，如 /posts/hello-world */
+  path: string;
+}
+const { path } = Astro.props;
+---
+
+<span class="twikoo-count" data-path={path}>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  <span class="num">...</span>
+</span>
+
+<script is:inline define:vars={{ envId: site.twikooEnvId }}>
+  (function () {
+    function load() {
+      if (!window.twikoo) {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/twikoo.all.min.js';
+        s.onload = count;
+        document.head.appendChild(s);
+      } else count();
+    }
+    function count() {
+      const els = document.querySelectorAll('.twikoo-count');
+      const urls = Array.from(els).map((el) => el.dataset.path);
+      twikoo.getCommentsCount({ envId: envId, urls: urls, includeReply: false }).then(function (res) {
+        res.forEach(function (r, i) {
+          const el = els[i];
+          if (el) el.querySelector('.num').textContent = (r.count || 0) + ' 评论';
+        });
+      }).catch(function () {
+        els.forEach(function (el) { el.querySelector('.num').textContent = '评论'; });
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', load);
+    } else load();
+  })();
+</script>

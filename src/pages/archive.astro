@@ -1,0 +1,32 @@
+---
+import { getSortedPosts, fmtDate, slugOf } from '../utils/posts';
+import Base from '../layouts/Base.astro';
+
+const posts = await getSortedPosts();
+const byYear: Record<string, typeof posts> = {};
+for (const p of posts) {
+  const y = String(p.data.date.getFullYear());
+  (byYear[y] ||= []).push(p);
+}
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<Base title="归档">
+  <h1 class="page-title">文章归档</h1>
+  <div class="card">
+    <p style="color:var(--text-light);margin:0 0 8px">共 {posts.length} 篇文章</p>
+    {years.map((y) => (
+      <section>
+        <h2 style="margin:16px 0 4px">{y}</h2>
+        <ul class="timeline">
+          {byYear[y].map((p) => (
+            <li class="timeline-item">
+              <span class="time">{fmtDate(p.data.date)}</span><br />
+              <a href={`/posts/${slugOf(p.id)}/`}>{p.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Base>

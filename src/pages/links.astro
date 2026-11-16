@@ -1,0 +1,29 @@
+---
+import links from '../data/links.json';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="友链">
+  <h1 class="page-title">友情链接</h1>
+  <div class="card">
+    <div class="link-grid">
+      {links.map((l: any) => (
+        <a class="link-card" href={l.url} target="_blank" rel="noopener">
+          <img src={l.avatar} alt={l.name} loading="lazy" onerror="this.src='/images/avatar.svg'" />
+          <span>
+            <span class="name">{l.name}</span><br />
+            <span class="desc">{l.desc}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+    {links.length === 0 && <p>暂无友链</p>}
+    <hr style="border:none;border-top:1px solid var(--border);margin:20px 0" />
+    <h3>申请友链</h3>
+    <p>欢迎交换友链，格式如下：</p>
+    <pre><code>名称：xxx
+链接：https://xxx
+头像：https://xxx/avatar.png
+描述：一句话介绍</code></pre>
+  </div>
+</Base>

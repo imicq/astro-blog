@@ -1,0 +1,19 @@
+---
+import site from '../config/site';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (url: string) => {
+  const u = url.replace(/\/$/, '') || '/';
+  if (u === '/') return path === '/';
+  return path.startsWith(u);
+};
+---
+
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="/">{site.title}</a>
+    <nav class="nav">
+      {site.nav.map((item) => <a href={item.url} class={isActive(item.url) ? 'active' : ''}>{item.text}</a>)}
+      <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">🌓</button>
+    </nav>
+  </div>
+</header>

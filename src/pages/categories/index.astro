@@ -1,0 +1,22 @@
+---
+import { getSortedPosts } from '../../utils/posts';
+import Base from '../../layouts/Base.astro';
+
+const posts = await getSortedPosts();
+const categories: Record<string, number> = {};
+for (const p of posts) {
+  categories[p.data.category] = (categories[p.data.category] || 0) + 1;
+}
+const entries = Object.entries(categories).sort((a, b) => b[1] - a[1]);
+---
+
+<Base title="分类">
+  <h1 class="page-title">分类</h1>
+  <div class="card">
+    {entries.map(([name, count]) => (
+      <a class="category-chip" style="font-size:1rem;padding:6px 16px;margin:6px" href={`/categories/${name}/`}>
+        {name}（{count}）
+      </a>
+    ))}
+  </div>
+</Base>

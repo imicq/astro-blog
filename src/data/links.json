@@ -1,0 +1,14 @@
+[
+  {
+    "name": "韩小白的博客",
+    "url": "https://example1.com",
+    "avatar": "https://example1.com/avatar.png",
+    "desc": "一个热爱折腾的博主"
+  },
+  {
+    "name": "示例友链二",
+    "url": "https://example2.com",
+    "avatar": "https://example2.com/avatar.png",
+    "desc": "记录生活与代码"
+  }
+]

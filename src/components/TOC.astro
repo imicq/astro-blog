@@ -1,0 +1,20 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+const { headings } = Astro.props;
+const list = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+{list.length > 0 && (
+  <aside class="toc">
+    <div class="toc-title">目录</div>
+    <ul>
+      {list.map((h) => (
+        <li>
+          <a href={`#${h.slug}`} style={h.depth === 3 ? 'padding-left:26px' : ''}>{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}

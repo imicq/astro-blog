@@ -1,0 +1,24 @@
+---
+import { getSortedPosts } from '../../utils/posts';
+import PostCard from '../../components/PostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const all = await getSortedPosts();
+  return paginate(all, { pageSize: 8 });
+}
+
+const { page } = Astro.props;
+---
+
+<Base>
+  <ul class="post-list">
+    {page.data.map((post: any) => (
+      <li>
+        <PostCard post={{ id: post.id, slug: post.id.replace(/\.md$/, ''), data: post.data }} />
+      </li>
+    ))}
+  </ul>
+  <Pagination currentPage={page.currentPage} totalPages={page.lastPage} baseUrl="/" />
+</Base>

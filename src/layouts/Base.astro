@@ -1,0 +1,60 @@
+---
+import site from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  withToc?: boolean;
+}
+const { title, description = site.subtitle, withToc = false } = Astro.props;
+const pageTitle = title ? `${title} - ${site.title}` : `${site.title} - ${site.titleSuffix}`;
+---
+
+<!doctype html>
+<html lang="zh-CN" data-theme={site.colorMode === 'auto' ? 'light' : site.colorMode}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+    <title>{pageTitle}</title>
+    <style is:global define:vars={{ accent: site.accentColor }}>
+      :root {
+        --accent: accent;
+      }
+    </style>
+    <script is:inline define:vars={{ configured: site.colorMode }}>
+      // 暗色模式初始化（防止闪屏）
+      (function () {
+        const mode = localStorage.getItem('colorMode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let theme;
+        if (mode === 'dark' || mode === 'light') theme = mode;
+        else if (configured === 'light' || configured === 'dark') theme = configured;
+        else theme = prefersDark ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main class="container" style={withToc ? 'max-width:1080px' : ''}>
+      <slot />
+    </main>
+    <Footer />
+    <script is:inline>
+      const toggle = document.getElementById('theme-toggle');
+      toggle?.addEventListener('click', () => {
+        const cur = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('colorMode', next);
+      });
+    </script>
+  </body>
+</html>

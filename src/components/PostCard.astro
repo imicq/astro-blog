@@ -1,0 +1,26 @@
+---
+import site from '../config/site';
+import TwikooCount from './TwikooCount.astro';
+
+interface Props {
+  post: { id: string; slug: string; data: { title: string; date: Date; summary: string; tags: string[]; category: string; cover?: string } };
+}
+const { post } = Astro.props;
+const url = `/posts/${post.slug}/`;
+const fmt = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+---
+
+<article class="post-card">
+  <a href={url}><h2>{post.data.title}</h2></a>
+  {post.data.summary && <p class="summary">{post.data.summary}</p>}
+  <div class="post-meta">
+    <span class="meta-author">
+      <img class="avatar" src={site.avatar} alt={site.author} />
+      {site.author}
+    </span>
+    <span>{fmt(post.data.date)}</span>
+    <TwikooCount path={url} />
+    {post.data.tags.map((t) => <a class="tag" href={`/tags/${t}/`}>{t}</a>)}
+  </div>
+</article>

@@ -1,0 +1,25 @@
+---
+import { getSortedPosts } from '../../utils/posts';
+import PostCard from '../../components/PostCard.astro';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((t) => ({
+    params: { tag: t },
+    props: { posts: posts.filter((p) => p.data.tags.includes(t)) },
+  }));
+}
+
+const { posts } = Astro.props as { posts: any[] };
+---
+
+<Base title={`标签：${Astro.params.tag}`}>
+  <h1 class="page-title">标签：{Astro.params.tag}</h1>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li><PostCard post={{ id: post.id, slug: post.id.replace(/\.md$/, ''), data: post.data }} /></li>
+    ))}
+  </ul>
+</Base>

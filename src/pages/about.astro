@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import TwikooComment from '../components/TwikooComment.astro';
+import Base from '../layouts/Base.astro';
+
+const page = (await getCollection('pages')).find((p) => p.id.replace(/\.md$/, '') === 'about');
+let Content: any = null;
+if (page) Content = (await render(page)).Content;
+---
+
+<Base title={page ? page.data.title : '关于'}>
+  <h1 class="page-title">{page ? page.data.title : '关于'}</h1>
+  <div class="card prose">
+    {Content ? <Content /> : <p>还没有关于页面，请在后台创建 content/pages/about.md。</p>}
+  </div>
+  {page?.data.comments && (
+    <div class="card">
+      <TwikooComment />
+    </div>
+  )}
+</Base>

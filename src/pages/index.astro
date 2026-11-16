@@ -1,0 +1,24 @@
+---
+import { getSortedPosts } from '../utils/posts';
+import PostCard from '../components/PostCard.astro';
+import Pagination from '../components/Pagination.astro';
+import site from '../config/site';
+import Base from '../layouts/Base.astro';
+
+const POSTS_PER_PAGE = 8;
+const all = await getSortedPosts();
+const totalPages = Math.ceil(all.length / POSTS_PER_PAGE);
+const pagePosts = all.slice(0, POSTS_PER_PAGE);
+---
+
+<Base>
+  {site.announcement && <div class="announcement">📢 {site.announcement}</div>}
+  <ul class="post-list">
+    {pagePosts.map((post) => (
+      <li>
+        <PostCard post={{ id: post.id, slug: post.id.replace(/\.md$/, ''), data: post.data }} />
+      </li>
+    ))}
+  </ul>
+  <Pagination currentPage={1} totalPages={totalPages} baseUrl="/" />
+</Base>

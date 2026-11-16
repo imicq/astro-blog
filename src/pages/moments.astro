@@ -1,0 +1,27 @@
+---
+import { getSortedMoments, fmtDate } from '../utils/posts';
+import { render } from 'astro:content';
+import TwikooComment from '../components/TwikooComment.astro';
+import Base from '../layouts/Base.astro';
+
+const moments = await getSortedMoments();
+const items = await Promise.all(
+  moments.map(async (m) => ({ m, Content: (await render(m)).Content }))
+);
+---
+
+<Base title="碎碎念">
+  <h1 class="page-title">碎碎念</h1>
+  {items.map(({ m, Content }) => (
+    <div class="card moment-card">
+      <div class="moment-time">
+        {m.data.mood && <span class="mood">{m.data.mood} · </span>}{fmtDate(m.data.date)}
+      </div>
+      <div class="prose"><Content /></div>
+    </div>
+  ))}
+  {moments.length === 0 && <div class="card">还没有碎碎念，快去后台发一条吧～</div>}
+  <div class="card">
+    <TwikooComment />
+  </div>
+</Base>

@@ -1,0 +1,31 @@
+---
+import site from '../config/site';
+
+interface Props {
+  /** 传页面标识则启用该页评论计数；不传则加载完整评论框 */
+  countEl?: never;
+}
+---
+
+<div id="tcomment"></div>
+
+<script is:inline define:vars={{ envId: site.twikooEnvId }}>
+  function loadTwikoo() {
+    if (!window.twikoo) {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/twikoo.all.min.js';
+      s.onload = init;
+      document.head.appendChild(s);
+    } else {
+      init();
+    }
+    function init() {
+      twikoo.init({
+        envId: envId,
+        el: '#tcomment',
+        onCommentLoaded: function () {},
+      });
+    }
+  }
+  loadTwikoo();
+</script>

@@ -1,0 +1,15 @@
+---
+import site from '../config/site';
+const footerText = site.footerText
+  .replace('{year}', String(new Date().getFullYear()))
+  .replace('{author}', site.author);
+---
+
+<footer class="site-footer">
+  <p>{footerText}</p>
+  <p>
+    {site.social.map((s) => <a href={s.url} target="_blank" rel="noopener">{s.text}</a>)} ·
+    Powered by <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> ·
+    Deployed on <a href="https://edgeone.ai" target="_blank" rel="noopener">EdgeOne Makers</a>
+  </p>
+</footer>

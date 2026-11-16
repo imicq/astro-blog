@@ -1,0 +1,27 @@
+{
+  "siteUrl": "https://example.edgeone.app",
+  "title": "韩情脉脉",
+  "subtitle": "记录与分享",
+  "titleSuffix": "记录与分享",
+  "author": "Hary",
+  "avatar": "/images/avatar.svg",
+  "announcement": "欢迎使用本博客系统，此公告可在后台「站点设置」中修改。",
+  "footerText": "© {year} {author} · 记录与分享",
+  "accentColor": "#e87d5a",
+  "colorMode": "auto",
+  "nav": [
+    { "text": "首页", "url": "/" },
+    { "text": "归档", "url": "/archive/" },
+    { "text": "分类", "url": "/categories/" },
+    { "text": "标签", "url": "/tags/" },
+    { "text": "碎碎念", "url": "/moments/" },
+    { "text": "友链", "url": "/links/" },
+    { "text": "留言板", "url": "/guestbook/" },
+    { "text": "关于", "url": "/about/" }
+  ],
+  "twikooEnvId": "https://your-twikoo.example.com",
+  "social": [
+    { "text": "GitHub", "url": "https://github.com" },
+    { "text": "邮箱", "url": "mailto:me@example.com" }
+  ]
+}
