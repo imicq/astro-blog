@@ -19,7 +19,7 @@ interface Props {
       s.src = '/js/twikoo.all.min.js';
       s.onerror = function () {
         const s2 = document.createElement('script');
-        s2.src = 'https://registry.npmmirror.com/twikoo/1.6.44/files/dist/twikoo.all.min.js';
+        s2.src = 'https://registry.npmmirror.com/twikoo/2.0.13/files/dist/twikoo.all.min.js';
         s2.onload = init;
         s2.onerror = function () { fail('评论脚本加载失败，请检查网络'); };
         document.head.appendChild(s2);
