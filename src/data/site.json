@@ -1,5 +1,5 @@
 {
-  "siteUrl": "https://example.edgeone.app",
+  "siteUrl": "https://astro.hxy.cc",
   "title": "韩情脉脉",
   "subtitle": "记录与分享",
   "titleSuffix": "记录与分享",
@@ -19,7 +19,7 @@
     { "text": "留言板", "url": "/guestbook/" },
     { "text": "关于", "url": "/about/" }
   ],
-  "twikooEnvId": "https://your-twikoo.example.com",
+  "twikooEnvId": "https://twikoo.hxy.cc",
   "social": [
     { "text": "GitHub", "url": "https://github.com" },
     { "text": "邮箱", "url": "mailto:me@example.com" }
