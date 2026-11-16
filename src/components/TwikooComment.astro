@@ -15,13 +15,13 @@ interface Props {
   function loadTwikoo() {
     if (!window.twikoo) {
       const s = document.createElement('script');
-      // 主源用国内可直连的 npmmirror，jsdelivr 兜底
-      s.src = 'https://registry.npmmirror.com/twikoo/1.6.44/files/twikoo.all.min.js';
+      // 优先同源本地脚本（已随博客构建），失败再用公共 CDN 兜底
+      s.src = '/js/twikoo.all.min.js';
       s.onerror = function () {
         const s2 = document.createElement('script');
-        s2.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/twikoo.all.min.js';
+        s2.src = 'https://registry.npmmirror.com/twikoo/1.6.44/files/dist/twikoo.all.min.js';
         s2.onload = init;
-        s2.onerror = fail;
+        s2.onerror = function () { fail('评论脚本加载失败，请检查网络'); };
         document.head.appendChild(s2);
       };
       s.onload = init;
@@ -39,7 +39,7 @@ interface Props {
     }
     function fail(msg) {
       const box = document.querySelector('#tcomment .twikoo-loading');
-      if (box) box.textContent = (msg || '评论加载失败') + '（若站点使用临时预览域名，评论功能需绑定正式域名后才可用）';
+      if (box) box.textContent = msg || '评论加载失败';
     }
   }
   loadTwikoo();
