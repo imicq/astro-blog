@@ -20,6 +20,16 @@ export interface SiteConfig {
   nav: { text: string; url: string }[];
   twikooEnvId: string;
   social: { text: string; url: string }[];
+  /** 站点图标地址，默认 /favicon.svg */
+  favicon?: string;
+  /** 首页每页文章数 */
+  perPage?: number;
+  /** 页脚备案号/附加信息（可选） */
+  beian?: string;
+  /** 全站评论开关 */
+  commentsEnabled?: boolean;
+  /** 文章目录开关 */
+  tocEnabled?: boolean;
 }
 
 export default data as SiteConfig;

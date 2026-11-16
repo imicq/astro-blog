@@ -6,7 +6,7 @@ interface Props {
   post: { id: string; slug: string; data: { title: string; date: Date; summary: string; tags: string[]; category: string; cover?: string } };
 }
 const { post } = Astro.props;
-const url = `/posts/${post.slug}/`;
+const url = `/${post.slug}.html`;
 const fmt = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 ---

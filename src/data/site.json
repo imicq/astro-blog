@@ -10,18 +10,53 @@
   "accentColor": "#e87d5a",
   "colorMode": "auto",
   "nav": [
-    { "text": "首页", "url": "/" },
-    { "text": "归档", "url": "/archive/" },
-    { "text": "分类", "url": "/categories/" },
-    { "text": "标签", "url": "/tags/" },
-    { "text": "碎碎念", "url": "/moments/" },
-    { "text": "友链", "url": "/links/" },
-    { "text": "留言板", "url": "/guestbook/" },
-    { "text": "关于", "url": "/about/" }
+    {
+      "text": "首页",
+      "url": "/"
+    },
+    {
+      "text": "归档",
+      "url": "/archive.html"
+    },
+    {
+      "text": "分类",
+      "url": "/categories.html"
+    },
+    {
+      "text": "标签",
+      "url": "/tags.html"
+    },
+    {
+      "text": "碎碎念",
+      "url": "/moments.html"
+    },
+    {
+      "text": "友链",
+      "url": "/links.html"
+    },
+    {
+      "text": "留言板",
+      "url": "/guestbook.html"
+    },
+    {
+      "text": "关于",
+      "url": "/about.html"
+    }
   ],
   "twikooEnvId": "https://twikoo.hxy.cc",
   "social": [
-    { "text": "GitHub", "url": "https://github.com" },
-    { "text": "邮箱", "url": "mailto:me@example.com" }
-  ]
+    {
+      "text": "GitHub",
+      "url": "https://github.com"
+    },
+    {
+      "text": "邮箱",
+      "url": "mailto:me@example.com"
+    }
+  ],
+  "favicon": "/favicon.svg",
+  "perPage": 8,
+  "commentsEnabled": true,
+  "tocEnabled": true,
+  "beian": ""
 }

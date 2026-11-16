@@ -22,7 +22,7 @@ const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
           {byYear[y].map((p) => (
             <li class="timeline-item">
               <span class="time">{fmtDate(p.data.date)}</span><br />
-              <a href={`/posts/${slugOf(p.id)}/`}>{p.data.title}</a>
+              <a href={`/${slugOf(p.id)}.html`}>{p.data.title}</a>
             </li>
           ))}
         </ul>
