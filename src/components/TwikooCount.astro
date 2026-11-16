@@ -17,7 +17,13 @@ const { path } = Astro.props;
     function load() {
       if (!window.twikoo) {
         const s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/twikoo.all.min.js';
+        s.src = 'https://registry.npmmirror.com/twikoo/1.6.44/files/twikoo.all.min.js';
+        s.onerror = function () {
+          const s2 = document.createElement('script');
+          s2.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/twikoo.all.min.js';
+          s2.onload = count;
+          document.head.appendChild(s2);
+        };
         s.onload = count;
         document.head.appendChild(s);
       } else count();
