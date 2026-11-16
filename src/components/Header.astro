@@ -10,10 +10,30 @@ const isActive = (url: string) => {
 
 <header class="site-header">
   <div class="inner">
-    <a class="logo" href="/">{site.title}</a>
-    <nav class="nav">
+    <a class="logo" href="/">
+      {site.logo && <img class="logo-img" src={site.logo} alt={site.title} />}
+      <span>{site.title}</span>
+    </a>
+    <button id="nav-toggle" class="nav-toggle" aria-label="打开菜单">☰</button>
+    <nav class="nav" id="site-nav">
       {site.nav.map((item) => <a href={item.url} class={isActive(item.url) ? 'active' : ''}>{item.text}</a>)}
       <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">🌓</button>
     </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+  toggle?.addEventListener('click', () => {
+    nav?.classList.toggle('open');
+    toggle.textContent = nav?.classList.contains('open') ? '✕' : '☰';
+  });
+  // 点击菜单项后自动收起
+  nav?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      if (toggle) toggle.textContent = '☰';
+    })
+  );
+</script>

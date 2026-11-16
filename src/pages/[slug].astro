@@ -29,7 +29,6 @@ const { Content, headings } = await render(post);
             </span>
             <span>{fmtDate(post.data.date)}</span>
             <a class="category-chip" href={`/categories/${post.data.category}.html`}>{post.data.category}</a>
-            {post.data.tags.map((t) => <a class="tag" href={`/tags/${t}.html`}>{t}</a>)}
           </div>
         </div>
         <div class="prose">

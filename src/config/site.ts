@@ -22,10 +22,16 @@ export interface SiteConfig {
   social: { text: string; url: string }[];
   /** 站点图标地址，默认 /favicon.svg */
   favicon?: string;
+  /** 顶部导航栏中间展示的站点 logo 图片地址（可选） */
+  logo?: string;
   /** 首页每页文章数 */
   perPage?: number;
-  /** 页脚备案号/附加信息（可选） */
-  beian?: string;
+  /** ICP 备案号（显示为链接，指向工信部备案系统） */
+  beianIcp?: string;
+  /** 公安备案号（显示为链接，指向公安备案系统） */
+  beianPolice?: string;
+  /** 友链页「申请友链」说明文字 */
+  linksIntro?: string;
   /** 全站评论开关 */
   commentsEnabled?: boolean;
   /** 文章目录开关 */

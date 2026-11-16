@@ -164,10 +164,29 @@ img {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .logo:hover {
   color: var(--accent);
   opacity: 1;
+}
+.logo-img {
+  height: 28px;
+  width: auto;
+  border-radius: 6px;
+}
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 1.1rem;
+  line-height: 1.4;
 }
 .nav {
   display: flex;
@@ -186,6 +205,40 @@ img {
   color: var(--accent);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   opacity: 1;
+}
+/* 手机端：右侧汉堡菜单，点开展开导航面板 */
+@media (max-width: 720px) {
+  .nav-toggle {
+    display: inline-block;
+  }
+  .site-header .inner {
+    flex-wrap: nowrap;
+  }
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 16px 14px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    gap: 2px;
+  }
+  .nav.open {
+    display: flex;
+  }
+  .nav a {
+    padding: 10px 14px;
+    font-size: 1rem;
+  }
+  .theme-toggle {
+    margin-top: 6px;
+    align-self: flex-start;
+  }
 }
 .theme-toggle {
   cursor: pointer;
@@ -211,6 +264,14 @@ img {
 }
 .site-footer a:hover {
   color: var(--accent);
+}
+.site-footer .beian {
+  font-size: 0.78rem;
+  opacity: 0.8;
+  margin: 2px 0;
+}
+.site-footer .beian a + a::before {
+  content: ' · ';
 }
 
 /* ---------- 正文排版 ---------- */

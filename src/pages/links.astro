@@ -1,5 +1,6 @@
 ---
 import links from '../data/links.json';
+import site from '../config/site';
 import Base from '../layouts/Base.astro';
 ---
 
@@ -18,12 +19,20 @@ import Base from '../layouts/Base.astro';
       ))}
     </div>
     {links.length === 0 && <p>暂无友链</p>}
-    <hr style="border:none;border-top:1px solid var(--border);margin:20px 0" />
-    <h3>申请友链</h3>
-    <p>欢迎交换友链，格式如下：</p>
-    <pre><code>名称：xxx
-链接：https://xxx
-头像：https://xxx/avatar.png
-描述：一句话介绍</code></pre>
+    {site.linksIntro && (
+      <>
+        <hr style="border:none;border-top:1px solid var(--border);margin:20px 0" />
+        <h3>申请友链</h3>
+        <div class="links-intro">{site.linksIntro}</div>
+      </>
+    )}
   </div>
 </Base>
+
+<style>
+  .links-intro {
+    white-space: pre-line;
+    line-height: 1.9;
+    color: var(--text-light);
+  }
+</style>

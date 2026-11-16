@@ -3,7 +3,7 @@ import site from '../config/site';
 import TwikooCount from './TwikooCount.astro';
 
 interface Props {
-  post: { id: string; slug: string; data: { title: string; date: Date; summary: string; tags: string[]; category: string; cover?: string } };
+  post: { id: string; slug: string; data: { title: string; date: Date; summary: string; category: string; cover?: string } };
 }
 const { post } = Astro.props;
 const url = `/${post.slug}.html`;
@@ -21,6 +21,5 @@ const fmt = (d: Date) =>
     </span>
     <span>{fmt(post.data.date)}</span>
     <TwikooCount path={url} />
-    {post.data.tags.map((t) => <a class="tag" href={`/tags/${t}/`}>{t}</a>)}
   </div>
 </article>

@@ -23,20 +23,12 @@
       "url": "/categories.html"
     },
     {
-      "text": "标签",
-      "url": "/tags.html"
-    },
-    {
       "text": "碎碎念",
       "url": "/moments.html"
     },
     {
       "text": "友链",
       "url": "/links.html"
-    },
-    {
-      "text": "留言板",
-      "url": "/guestbook.html"
     },
     {
       "text": "关于",
@@ -58,5 +50,9 @@
   "perPage": 8,
   "commentsEnabled": true,
   "tocEnabled": true,
-  "beian": ""
+  "beian": "",
+  "logo": "",
+  "beianIcp": "",
+  "beianPolice": "",
+  "linksIntro": "欢迎交换友链，申请格式如下：\n名称：你的站点名\n链接：https://你的域名\n头像：头像图片地址\n描述：一句话介绍你的站点\n\n留言或邮件联系我即可，看到后会尽快添加。"
 }
